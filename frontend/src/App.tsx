@@ -58,6 +58,12 @@ export default function App() {
   // ── handlers ─────────────────────────────────────────────────────────────────
   const handleReview = () => {
     if (!code.trim()) return
+    // Reset all other tab results so stale data doesn't show after re-review
+    explainMutation.reset()
+    optimizeMutation.reset()
+    debugMutation.reset()
+    interviewMutation.reset()
+    translateMutation.reset()
     reviewMutation.mutate({ code, language, mode })
   }
 
