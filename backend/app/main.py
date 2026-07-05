@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import get_settings
-from app.routers import debug, explain, interview, optimize, review, translate
+from app.routers import batch, debug, explain, interview, optimize, review, translate
 from app.services.llm_client import LLMProviderError, LLMRateLimitError, LLMTimeoutError
 
 settings = get_settings()
@@ -105,6 +105,7 @@ def create_app() -> FastAPI:
     app.include_router(optimize.router)
     app.include_router(interview.router)
     app.include_router(translate.router)
+    app.include_router(batch.router)
 
     # ── Health check — used by Render health checks and "wake-up" pings ──────
     @app.get("/health", tags=["meta"])

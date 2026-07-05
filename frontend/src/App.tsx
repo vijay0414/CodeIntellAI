@@ -8,6 +8,7 @@ import { OptimizePanel }           from './components/OptimizePanel'
 import { ReviewPanel }             from './components/ReviewPanel'
 import { TabNavigation }           from './components/TabNavigation'
 import { TranslatePanel }          from './components/TranslatePanel'
+import { BatchPanel }              from './components/BatchPanel'
 import { ErrorState }              from './components/ErrorState'
 
 import { useCodeReview }         from './hooks/useCodeReview'
@@ -16,6 +17,7 @@ import { useCodeOptimize }       from './hooks/useCodeOptimize'
 import { useCodeDebug }          from './hooks/useCodeDebug'
 import { useInterviewQuestions } from './hooks/useInterviewQuestions'
 import { useCodeTranslate }      from './hooks/useCodeTranslate'
+import { useBatchReview }        from './hooks/useBatchReview'
 
 import { useAppStore } from './store/useAppStore'
 import type { TabId }  from './types'
@@ -28,6 +30,7 @@ const TAB_META: Record<TabId, { color: string; bg: string; border: string; icon:
   debug:     { color: 'text-red-300',    bg: 'bg-red-900/20',    border: 'border-red-800/40',    icon: '🐛' },
   interview: { color: 'text-pink-300',   bg: 'bg-pink-500/10',   border: 'border-pink-500/30',   icon: '🎯' },
   translate: { color: 'text-slate-200',  bg: 'bg-slate-500/10',  border: 'border-slate-500/30',  icon: '🌐' },
+  batch:     { color: 'text-orange-300', bg: 'bg-orange-500/10', border: 'border-orange-500/30', icon: '📦' },
 }
 
 export default function App() {
@@ -44,6 +47,7 @@ export default function App() {
     { id: 'debug',     label: 'Debug'         },
     { id: 'interview', label: 'Interview Prep' },
     { id: 'translate', label: 'Translate'     },
+    { id: 'batch',     label: 'Batch Review'  },
   ], [])
 
   const [historyOpen,   setHistoryOpen]   = useState(false)
@@ -57,6 +61,7 @@ export default function App() {
   const debugMutation     = useCodeDebug()
   const interviewMutation = useInterviewQuestions()
   const translateMutation = useCodeTranslate()
+  const batchMutation     = useBatchReview()
 
   const handleReview = () => {
     if (!code.trim()) return
@@ -74,6 +79,13 @@ export default function App() {
   const handleTranslate = (targetLang: string) =>
     translateMutation.mutate({ code, source_language: language, target_language: targetLang, mode })
 
+  const handleBatch = (files: File[], batchMode: 'beginner' | 'advanced') => {
+    const fd = new FormData()
+    files.forEach(f => fd.append('files', f))
+    fd.append('mode', batchMode)
+    batchMutation.mutate(fd)
+  }
+
   const handleDebugSubmit = () => {
     if (!debugTrace.trim()) return
     debugMutation.mutate({ code, language, error_trace: debugTrace.trim(), sample_input: debugSample.trim() || null })
@@ -84,6 +96,7 @@ export default function App() {
     reviewMutation.reset(); explainMutation.reset()
     optimizeMutation.reset(); debugMutation.reset()
     interviewMutation.reset(); translateMutation.reset()
+    batchMutation.reset()
   }
 
   const renderPanel = () => {
@@ -107,6 +120,10 @@ export default function App() {
         return <TranslatePanel result={translateMutation.data ?? null} sourceLanguage={language}
           isLoading={translateMutation.isPending} error={translateMutation.error?.message ?? null}
           onSubmit={handleTranslate} onRetry={() => translateMutation.reset()} />
+      case 'batch':
+        return <BatchPanel result={batchMutation.data ?? null}
+          isLoading={batchMutation.isPending} error={batchMutation.error?.message ?? null}
+          onSubmit={handleBatch} onRetry={() => batchMutation.reset()} />
       case 'review':
       default:
         return <ReviewPanel result={reviewResult} isLoading={reviewMutation.isPending}

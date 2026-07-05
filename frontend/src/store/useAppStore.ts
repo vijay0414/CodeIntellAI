@@ -1,15 +1,15 @@
 import { create } from 'zustand'
-import type { Language, Mode, ReviewResult, TabId } from '../types'
+import type { BatchReviewResult, Language, Mode, ReviewResult, TabId } from '../types'
 
 // ── History entry stored in memory (session only) ─────────────────────────────
 export interface HistoryEntry {
-  id:          string           // nanoid-style timestamp id
-  code:        string           // full code
-  language:    Language
-  mode:        Mode
+  id:           string
+  code:         string
+  language:     Language
+  mode:         Mode
   health_score: number
-  summary:     string
-  created_at:  string           // ISO string
+  summary:      string
+  created_at:   string
 }
 
 interface AppStore {
@@ -17,6 +17,7 @@ interface AppStore {
   language:     Language
   mode:         Mode
   reviewResult: ReviewResult | null
+  batchResult:  BatchReviewResult | null
   hasSubmitted: boolean
   activeTab:    TabId
   history:      HistoryEntry[]
@@ -25,6 +26,7 @@ interface AppStore {
   setLanguage:     (l: Language)   => void
   setMode:         (m: Mode)       => void
   setReviewResult: (r: ReviewResult, code: string, language: Language, mode: Mode) => void
+  setBatchResult:  (r: BatchReviewResult) => void
   setActiveTab:    (t: TabId)      => void
   loadFromHistory: (entry: HistoryEntry) => void
   clearHistory:    () => void
@@ -50,6 +52,7 @@ export const useAppStore = create<AppStore>(set => ({
   language:     'python',
   mode:         'beginner',
   reviewResult: null,
+  batchResult:  null,
   hasSubmitted: false,
   activeTab:    'review',
   history:      [],
@@ -71,10 +74,11 @@ export const useAppStore = create<AppStore>(set => ({
     return {
       reviewResult,
       hasSubmitted: true,
-      // Prepend new entry; keep max 50 entries
       history: [entry, ...state.history].slice(0, 50),
     }
   }),
+
+  setBatchResult: batchResult => set({ batchResult }),
 
   setActiveTab: activeTab => set({ activeTab }),
 
@@ -82,7 +86,6 @@ export const useAppStore = create<AppStore>(set => ({
     code:         entry.code,
     language:     entry.language,
     mode:         entry.mode,
-    // Reset panels so user re-runs on the loaded code
     reviewResult: null,
     hasSubmitted: false,
     activeTab:    'review',

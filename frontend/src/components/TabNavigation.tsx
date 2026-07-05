@@ -16,6 +16,7 @@ const TAB_ICONS: Record<TabId, string> = {
   debug:     '🐛',
   interview: '🎯',
   translate: '🌐',
+  batch:     '📦',
 }
 
 export function TabNavigation({ tabs, activeTab, onSelect, onHistoryClick, historyOpen }: Props) {

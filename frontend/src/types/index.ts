@@ -100,6 +100,30 @@ export interface HistoryResponse {
   items: HistoryItem[]
 }
 
+// ── Batch Review ─────────────────────────────────────────────────────────────
+
+export interface BatchFileResult {
+  filename:     string
+  language:     string
+  health_score: number | null
+  issues:       ReviewIssue[]
+  error:        string | null
+}
+
+export interface BatchSummary {
+  total_files:          number
+  average_health_score: number
+  total_issues:         number
+  most_common_category: string
+  worst_file:           string
+  best_file:            string
+}
+
+export interface BatchReviewResult {
+  summary:      BatchSummary
+  file_results: BatchFileResult[]
+}
+
 // ── Tabs ──────────────────────────────────────────────────────────────────────
 
-export type TabId = 'review' | 'explain' | 'optimize' | 'debug' | 'interview' | 'translate'
+export type TabId = 'review' | 'explain' | 'optimize' | 'debug' | 'interview' | 'translate' | 'batch'

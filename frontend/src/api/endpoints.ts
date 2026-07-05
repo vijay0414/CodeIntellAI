@@ -54,3 +54,9 @@ export const getHistory = (userId: string, page = 1, pageSize = 20) =>
 // fall back to a plain fetch DELETE which works fine for beforeunload.
 export const deleteHistoryUrl = (userId: string) =>
   `${import.meta.env.VITE_API_BASE ?? 'http://localhost:8000'}/api/history/${userId}`
+
+// ── Batch Review ──────────────────────────────────────────────────────────────
+export const batchReviewCode = (formData: FormData) =>
+  client.post<import('../types').BatchReviewResult>('/api/batch-review', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  }).then(r => r.data)
