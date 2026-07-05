@@ -35,7 +35,7 @@ export function TranslatePanel({ result, sourceLanguage, isLoading, error, onSub
         </svg>
         <div>
           <p className="text-[11px] uppercase tracking-wider text-slate-500 mb-1.5">To</p>
-          <select value={target} onChange={e => setTarget(e.target.value)}
+          <select value={target} onChange={e => setTarget(e.target.value as Language)}
             className="bg-[#0b0d12] border border-[#1e2333] focus:border-blue-500 text-slate-200
                        text-sm rounded-lg px-3 py-2 outline-none cursor-pointer transition-colors">
             {available.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
