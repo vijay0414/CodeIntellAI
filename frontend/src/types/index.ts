@@ -108,6 +108,7 @@ export interface BatchFileResult {
   health_score: number | null
   issues:       ReviewIssue[]
   error:        string | null
+  code?:        string        // echoed back so frontend can run per-file actions
 }
 
 export interface BatchSummary {

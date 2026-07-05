@@ -80,6 +80,7 @@ async def _review_one(file: UploadFile, mode: str, llm: BaseLLMClient) -> FileRe
             return FileReviewResult(
                 filename=filename,
                 language=language,
+                code=code,
                 error="Unsupported file type. Supported: .py .js .jsx .ts .tsx .java .cpp .go .rs .cs",
             )
 
@@ -89,6 +90,7 @@ async def _review_one(file: UploadFile, mode: str, llm: BaseLLMClient) -> FileRe
             language=language,
             health_score=response.health_score,
             issues=response.issues,
+            code=code,
         )
     except Exception as exc:
         logger.warning("Batch review failed for %s: %s", filename, exc)
@@ -96,6 +98,7 @@ async def _review_one(file: UploadFile, mode: str, llm: BaseLLMClient) -> FileRe
             filename=filename,
             language=language,
             error=str(exc),
+            code=code if 'code' in dir() else "",
         )
 
 
