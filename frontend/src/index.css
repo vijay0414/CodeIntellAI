@@ -7,7 +7,7 @@
 
   html, body, #root {
     height: 100%;
-    background-color: #0A0A0A;
+    background-color: #0b0d12;
     color: #e2e8f0;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -15,15 +15,15 @@
 
   /* scrollbar */
   ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: #111111; }
-  ::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: #DC2626; }
+  ::-webkit-scrollbar-track { background: #111318; }
+  ::-webkit-scrollbar-thumb { background: #2a3050; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
 }
 
 @layer components {
   /* Cards */
   .card {
-    @apply bg-[#161616] border border-[#2A2A2A] rounded-xl p-4;
+    @apply bg-[#161a24] border border-[#1e2333] rounded-xl p-4;
   }
 
   /* Badges */
@@ -36,9 +36,9 @@
   .skeleton {
     background: linear-gradient(
       90deg,
-      #161616 25%,
-      #1A1A1A 50%,
-      #161616 75%
+      #161a24 25%,
+      #1c2030 50%,
+      #161a24 75%
     );
     background-size: 800px 100%;
     animation: shimmer 1.4s ease infinite;
@@ -50,7 +50,7 @@
            whitespace-nowrap transition-all duration-150
            border-b-2 -mb-px;
   }
-  .tab-btn-active  { @apply border-red-600 text-white; }
+  .tab-btn-active  { @apply border-blue-500 text-white; }
   .tab-btn-inactive {
     @apply border-transparent text-slate-500
            hover:text-slate-300 hover:border-slate-600;

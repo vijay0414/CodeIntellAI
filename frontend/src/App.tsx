@@ -37,7 +37,7 @@ export default function App() {
     { id: 'translate', label: 'Translate'     },
   ], [])
 
-  // ── history sidebar ──────────────────────────────────────────────────────────
+  // ── history sidebar — hidden by default, shown only when History tab clicked ──
   const [historyOpen, setHistoryOpen] = useState(false)
 
   // ── debug local state ────────────────────────────────────────────────────────
@@ -166,18 +166,18 @@ export default function App() {
 
   // ── ui ───────────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-slate-100 font-sans">
+    <div className="min-h-screen bg-[#06070b] text-slate-100 font-sans">
       <div className="mx-auto max-w-7xl flex flex-col gap-6 px-4 py-5 lg:px-6">
 
         {/* ── header ── */}
-        <header className="rounded-3xl border border-[#2A2A2A] bg-[#111111]/90 px-5 py-5
-                           shadow-[0_20px_70px_rgba(0,0,0,0.6)] backdrop-blur">
+        <header className="rounded-3xl border border-[#1c2233] bg-[#0d1018]/90 px-5 py-5
+                           shadow-[0_20px_70px_rgba(2,8,23,0.45)] backdrop-blur">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-red-600/20
-                              bg-red-600/10 px-3 py-1 text-[11px] font-semibold uppercase
-                              tracking-[0.25em] text-red-400">
-                <span className="h-2 w-2 rounded-full bg-red-500" />
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-blue-500/20
+                              bg-blue-500/10 px-3 py-1 text-[11px] font-semibold uppercase
+                              tracking-[0.25em] text-blue-300">
+                <span className="h-2 w-2 rounded-full bg-blue-400" />
                 Code Intelligence Agent
               </div>
               <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
@@ -190,19 +190,19 @@ export default function App() {
             </div>
 
             <div className="flex flex-wrap gap-2 text-sm text-slate-300">
-              <div className="rounded-2xl border border-[#2A2A2A] bg-[#161616] px-3 py-2">
+              <div className="rounded-2xl border border-[#1e2333] bg-[#161a24] px-3 py-2">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Mode</div>
                 <div className="font-medium capitalize">{mode}</div>
               </div>
-              <div className="rounded-2xl border border-[#2A2A2A] bg-[#161616] px-3 py-2">
+              <div className="rounded-2xl border border-[#1e2333] bg-[#161a24] px-3 py-2">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Language</div>
                 <div className="font-medium capitalize">{language}</div>
               </div>
               {hasSubmitted && (
                 <button
                   onClick={handleNewSession}
-                  className="rounded-2xl border border-[#2A2A2A] bg-[#161616] px-3 py-2
-                             hover:border-red-600/40 hover:text-white transition-colors text-slate-400"
+                  className="rounded-2xl border border-[#1e2333] bg-[#161a24] px-3 py-2
+                             hover:border-blue-500/40 hover:text-white transition-colors text-slate-400"
                 >
                   <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Session</div>
                   <div className="font-medium">New ↺</div>
@@ -216,17 +216,17 @@ export default function App() {
         <div className={`grid gap-6 ${historyOpen ? 'xl:grid-cols-[1.6fr_0.8fr]' : ''}`}>
 
           {/* ── left column: editor + panels ── */}
-          <section className="rounded-3xl border border-[#2A2A2A] bg-[#111111]/90 p-4
-                              shadow-[0_20px_70px_rgba(0,0,0,0.5)] sm:p-5">
+          <section className="rounded-3xl border border-[#1c2233] bg-[#0d1018]/90 p-4
+                              shadow-[0_20px_70px_rgba(2,8,23,0.35)] sm:p-5">
             <CodeEditor onSubmit={handleReview} isLoading={reviewMutation.isPending} />
 
             {/* pre-submit hint */}
             {!hasSubmitted && !reviewMutation.isPending && (
-              <div className="mt-5 rounded-2xl border border-dashed border-[#2A2A2A]
-                              bg-[#0A0A0A] p-4 text-sm text-slate-400">
+              <div className="mt-5 rounded-2xl border border-dashed border-[#2a3050]
+                              bg-[#0b0d12] p-4 text-sm text-slate-400">
                 <p className="font-medium text-slate-300">How it works</p>
                 <p className="mt-2 leading-7">
-                  Hit <span className="text-red-400 font-medium">Review Code</span> to kick things off.
+                  Hit <span className="text-blue-400 font-medium">Review Code</span> to kick things off.
                   Results appear instantly in the Review tab, then all other tabs unlock — each
                   fetches independently so a slow Optimize call never blocks your Explain tab.
                 </p>
@@ -253,14 +253,14 @@ export default function App() {
                   onHistoryClick={() => setHistoryOpen(v => !v)}
                   historyOpen={historyOpen}
                 />
-                <div className="rounded-2xl border border-[#2A2A2A] bg-[#0A0A0A] p-4 sm:p-5 min-h-48">
+                <div className="rounded-2xl border border-[#1e2333] bg-[#080b11] p-4 sm:p-5 min-h-48">
                   {renderPanel()}
                 </div>
               </div>
             )}
           </section>
 
-          {/* ── right column: history + signal overview ── */}
+          {/* ── right column: history + signal overview — only when history is open ── */}
           {historyOpen && (
           <aside className="space-y-4">
             <HistorySidebar
@@ -268,25 +268,25 @@ export default function App() {
               onToggle={() => setHistoryOpen(v => !v)}
             />
 
-            <div className="rounded-3xl border border-[#2A2A2A] bg-[#111111]/90 p-4
-                            shadow-[0_20px_70px_rgba(0,0,0,0.4)]">
+            <div className="rounded-3xl border border-[#1c2233] bg-[#0d1018]/90 p-4
+                            shadow-[0_20px_70px_rgba(2,8,23,0.25)]">
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-sm font-semibold text-slate-200">Signal overview</p>
-                <span className="rounded-full bg-red-600/10 px-2.5 py-1 text-[10px] font-semibold
-                                 uppercase tracking-[0.25em] text-red-400">
+                <span className="rounded-full bg-blue-500/10 px-2.5 py-1 text-[10px] font-semibold
+                                 uppercase tracking-[0.25em] text-blue-300">
                   Live
                 </span>
               </div>
               <div className="space-y-2 text-sm text-slate-400">
-                <div className="flex items-center justify-between rounded-xl border border-[#2A2A2A]
-                                bg-[#161616] px-3 py-2">
+                <div className="flex items-center justify-between rounded-xl border border-[#1e2333]
+                                bg-[#11151f] px-3 py-2">
                   <span>Issues found</span>
                   <span className="font-medium text-slate-200">
                     {reviewResult ? reviewResult.issues.length : '—'}
                   </span>
                 </div>
-                <div className="flex items-center justify-between rounded-xl border border-[#2A2A2A]
-                                bg-[#161616] px-3 py-2">
+                <div className="flex items-center justify-between rounded-xl border border-[#1e2333]
+                                bg-[#11151f] px-3 py-2">
                   <span>Health score</span>
                   <span className={`font-medium ${
                     reviewResult
@@ -298,8 +298,8 @@ export default function App() {
                     {reviewResult ? reviewResult.health_score : '—'}
                   </span>
                 </div>
-                <div className="flex items-center justify-between rounded-xl border border-[#2A2A2A]
-                                bg-[#161616] px-3 py-2">
+                <div className="flex items-center justify-between rounded-xl border border-[#1e2333]
+                                bg-[#11151f] px-3 py-2">
                   <span>Critical issues</span>
                   <span className="font-medium text-red-400">
                     {reviewResult

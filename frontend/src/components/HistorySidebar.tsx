@@ -13,7 +13,6 @@ function fmt(iso: string) {
 }
 
 function ScorePill({ score }: { score: number }) {
-  // Semantic health colors — kept unchanged
   const cls =
     score >= 80 ? 'bg-emerald-500/15 text-emerald-400' :
     score >= 50 ? 'bg-amber-500/15  text-amber-400'    :
@@ -34,8 +33,8 @@ export function HistorySidebar({ isOpen, onToggle }: Props) {
   const { history, loadFromHistory, clearHistory } = useAppStore()
 
   return (
-    <div className="rounded-3xl border border-[#2A2A2A] bg-[#111111]/90 p-4
-                    shadow-[0_20px_70px_rgba(0,0,0,0.4)]">
+    <div className="rounded-3xl border border-[#1c2233] bg-[#0d1018]/90 p-4
+                    shadow-[0_20px_70px_rgba(2,8,23,0.25)]">
 
       {/* ── header ── */}
       <button
@@ -64,8 +63,8 @@ export function HistorySidebar({ isOpen, onToggle }: Props) {
 
           {/* empty state */}
           {history.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-[#2A2A2A]
-                            bg-[#0A0A0A] px-3 py-6 text-center">
+            <div className="rounded-2xl border border-dashed border-[#2a3050]
+                            bg-[#0b0d12] px-3 py-6 text-center">
               <p className="text-xs text-slate-600">
                 Run a review to start building history.
               </p>
@@ -80,20 +79,20 @@ export function HistorySidebar({ isOpen, onToggle }: Props) {
             <button
               key={entry.id}
               onClick={() => loadFromHistory(entry)}
-              className="flex w-full items-start justify-between rounded-2xl border border-[#2A2A2A]
-                         bg-[#161616] px-3 py-3 text-left transition-colors
-                         hover:border-red-600/40 hover:bg-[#1A1A1A] group"
+              className="flex w-full items-start justify-between rounded-2xl border border-[#1e2333]
+                         bg-[#11151f] px-3 py-3 text-left transition-colors
+                         hover:border-blue-500/40 hover:bg-[#161a24] group"
             >
               <div className="flex-1 min-w-0 pr-2">
                 {/* language + time */}
                 <div className="flex items-center gap-1.5 mb-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-red-400">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400">
                     {entry.language}
                   </span>
                   <span className="text-[10px] text-slate-600">·</span>
                   <span className="text-[10px] text-slate-600">{fmt(entry.created_at)}</span>
                 </div>
-                {/* code preview */}
+                {/* code preview — first non-empty line */}
                 <p className="text-xs text-slate-400 truncate font-mono leading-snug
                                group-hover:text-slate-300 transition-colors">
                   {entry.code.split('\n').find(l => l.trim()) ?? '(empty)'}

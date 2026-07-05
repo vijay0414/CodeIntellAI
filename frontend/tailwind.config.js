@@ -5,16 +5,16 @@ export default {
     extend: {
       colors: {
         bg: {
-          base:    '#0A0A0A',
-          surface: '#111111',
-          card:    '#161616',
-          border:  '#2A2A2A',
-          hover:   '#1A1A1A',
+          base:    '#0b0d12',
+          surface: '#111318',
+          card:    '#161a24',
+          border:  '#1e2333',
+          hover:   '#1c2030',
         },
         accent: {
-          DEFAULT: '#DC2626',
-          hover:   '#B91C1C',
-          muted:   'rgba(220,38,38,0.12)',
+          DEFAULT: '#3b82f6',
+          hover:   '#2563eb',
+          muted:   'rgba(59,130,246,0.12)',
         },
       },
       fontFamily: {

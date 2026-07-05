@@ -9,11 +9,11 @@ function AccordionStep({ step, index }: { step: WalkthroughStep; index: number }
     <div className="card overflow-hidden p-0">
       <button
         className="w-full flex items-center gap-3 px-4 py-3.5 text-left
-                   hover:bg-[#1A1A1A] transition-colors"
+                   hover:bg-[#1c2030] transition-colors"
         onClick={() => setOpen(v => !v)}
       >
-        <span className="shrink-0 w-6 h-6 rounded-full bg-red-600/15 border border-red-600/25
-                         text-red-400 text-xs font-bold flex items-center justify-center">
+        <span className="shrink-0 w-6 h-6 rounded-full bg-blue-600/15 border border-blue-500/25
+                         text-blue-400 text-xs font-bold flex items-center justify-center">
           {index + 1}
         </span>
         <span className="text-sm font-medium text-slate-200 flex-1">{step.section}</span>
@@ -23,7 +23,7 @@ function AccordionStep({ step, index }: { step: WalkthroughStep; index: number }
         </svg>
       </button>
       {open && (
-        <div className="px-4 pb-4 pt-1 border-t border-[#2A2A2A] panel-enter">
+        <div className="px-4 pb-4 pt-1 border-t border-[#1e2333] panel-enter">
           <p className="text-sm text-slate-400 leading-relaxed">{step.explanation}</p>
         </div>
       )}
@@ -42,7 +42,7 @@ export function ExplanationPanel({ result, isLoading, error, onLoad, onRetry }: 
 
   if (!result) return (
     <div className="flex flex-col items-center justify-center py-16 gap-4 text-center panel-enter">
-      <div className="w-14 h-14 rounded-2xl bg-[#161616] border border-[#2A2A2A] flex items-center justify-center">
+      <div className="w-14 h-14 rounded-2xl bg-[#161a24] border border-[#1e2333] flex items-center justify-center">
         <svg className="w-7 h-7 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477
@@ -55,8 +55,8 @@ export function ExplanationPanel({ result, isLoading, error, onLoad, onRetry }: 
         <p className="text-slate-600 text-sm mt-1">Get a section-by-section walkthrough</p>
       </div>
       <button onClick={onLoad}
-        className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold
-                   rounded-lg transition-all shadow-lg shadow-red-900/25 active:scale-95">
+        className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold
+                   rounded-lg transition-all shadow-lg shadow-blue-900/25 active:scale-95">
         Explain Code
       </button>
     </div>
@@ -64,7 +64,7 @@ export function ExplanationPanel({ result, isLoading, error, onLoad, onRetry }: 
 
   return (
     <div className="space-y-5 panel-enter">
-      <div className="card border-l-2 border-l-red-600">
+      <div className="card border-l-2 border-l-blue-500">
         <p className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">Overview</p>
         <p className="text-sm text-slate-300 leading-relaxed">{result.overview}</p>
       </div>
