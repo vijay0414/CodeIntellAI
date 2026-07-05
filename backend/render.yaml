@@ -15,7 +15,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: FRONTEND_URL
-        value: https://code-intell-ai-rose.vercel.app/
+        value: https://code-intell-ai.vercel.app
       - key: LLM_PROVIDER
         value: groq
       - key: APP_ENV
