@@ -2,7 +2,7 @@ services:
   - type: web
     name: codedoctor-backend
     env: python
-    region: India
+    region: Singapore
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
