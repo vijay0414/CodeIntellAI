@@ -18,7 +18,7 @@
 
 CodeDoctor is a full-stack AI-powered code intelligence tool built for developers who want more than just a linter. Paste any code snippet and get a structured review, plain-English explanation, automated debug analysis, performance optimization with complexity comparisons, cross-language translation, and interview questions — all from a single interface. The backend is fully stateless by design, meaning no code is ever stored server-side, and each feature runs as an independent API endpoint for clean separation and fast parallel loading.
 
-**Live Demo:** [ADD YOUR LIVE URL HERE]
+**Live Demo:** [(https://code-intell-ai.vercel.app/)]
 
 ---
 
@@ -33,20 +33,6 @@ CodeDoctor is a full-stack AI-powered code intelligence tool built for developer
 | 5 | 🌐 **Language Translator** | Converts code logic into a target language while preserving exact behavior. Includes notes on language-specific concept mappings. |
 | 6 | 🎯 **Interview Question Generator** | Detects patterns, algorithms, and data structures in your code, then generates relevant interview questions with difficulty tags and answer hints. |
 | 7 | 📦 **Batch Review** | Upload multiple files at once. Returns a summary dashboard (average health score, most common issue, best/worst file) plus per-file results, processed concurrently. |
-
----
-
-## Screenshots
-
-> Replace the placeholders below with actual screenshots after deployment.
-
-![Review Tab](./screenshots/review.png)
-![Explanation Tab](./screenshots/explain.png)
-![Debugger Tab](./screenshots/debug.png)
-![Optimizer Tab](./screenshots/optimize.png)
-![Translator Tab](./screenshots/translate.png)
-![Interview Questions Tab](./screenshots/interview.png)
-![Batch Review Tab](./screenshots/batch.png)
 
 ---
 
