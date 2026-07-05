@@ -16,35 +16,27 @@ export function CodeEditor({ onSubmit, isLoading }: Props) {
 
         {/* Language picker */}
         <div className="relative">
-          <select
-            value={language}
-            onChange={e => setLanguage(e.target.value as Language)}
-            className="appearance-none bg-[#161a24] border border-[#1e2333] text-slate-200
-                       text-sm rounded-lg pl-3 pr-8 py-2 focus:outline-none focus:border-blue-500
-                       cursor-pointer transition-colors hover:border-[#2a3050]"
-          >
-            {LANGUAGES.map(l => (
-              <option key={l.value} value={l.value}>{l.label}</option>
-            ))}
+          <select value={language} onChange={e => setLanguage(e.target.value as Language)}
+            className="appearance-none bg-[#1a1010] border border-[#2e1a1a] text-white
+                       text-sm rounded-lg pl-3 pr-8 py-2 focus:outline-none focus:border-red-700/60
+                       cursor-pointer transition-colors hover:border-[#4a2020]">
+            {LANGUAGES.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
           </select>
-          <svg className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500"
+          <svg className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#5a3030]"
             fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
           </svg>
         </div>
 
         {/* Mode toggle */}
-        <div className="flex bg-[#161a24] border border-[#1e2333] rounded-lg p-0.5 gap-0.5">
+        <div className="flex bg-[#1a1010] border border-[#2e1a1a] rounded-lg p-0.5 gap-0.5">
           {(['beginner', 'advanced'] as Mode[]).map(m => (
-            <button
-              key={m}
-              onClick={() => setMode(m)}
+            <button key={m} onClick={() => setMode(m)}
               className={`px-3 py-1.5 text-xs rounded-md font-medium capitalize transition-all ${
                 mode === m
-                  ? 'bg-blue-600 text-white shadow'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
+                  ? 'bg-red-600 text-white shadow shadow-red-900/40'
+                  : 'text-[#7a5050] hover:text-white'
+              }`}>
               {m}
             </button>
           ))}
@@ -52,21 +44,17 @@ export function CodeEditor({ onSubmit, isLoading }: Props) {
 
         <div className="flex-1" />
 
-        {/* CTA */}
-        <button
-          onClick={onSubmit}
-          disabled={isLoading || !code.trim()}
-          className="flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-500
+        {/* Review CTA */}
+        <button onClick={onSubmit} disabled={isLoading || !code.trim()}
+          className="flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-500
                      disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm
-                     font-semibold rounded-lg transition-all shadow-lg shadow-blue-900/25
-                     active:scale-95"
-        >
+                     font-semibold rounded-lg transition-all shadow-lg shadow-red-900/40
+                     active:scale-95">
           {isLoading ? (
             <>
               <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                <path className="opacity-75" fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
               </svg>
               Analysing…
             </>
@@ -83,18 +71,16 @@ export function CodeEditor({ onSubmit, isLoading }: Props) {
         </button>
       </div>
 
-      {/* ── Monaco ── */}
-      <div className="rounded-xl overflow-hidden border border-[#1e2333] shadow-2xl">
-        {/* Fake traffic-light bar */}
-        <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#0f1117] border-b border-[#1e2333]">
-          <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-          <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-          <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
-          <span className="ml-3 text-xs text-slate-600 font-mono">
+      {/* ── Monaco editor ── */}
+      <div className="rounded-xl overflow-hidden border border-[#2e1a1a] shadow-2xl shadow-red-950/20">
+        <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#150909] border-b border-[#2e1a1a]">
+          <span className="w-3 h-3 rounded-full bg-red-500/80" />
+          <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+          <span className="w-3 h-3 rounded-full bg-green-500/80" />
+          <span className="ml-3 text-xs text-[#5a3030] font-mono">
             {LANGUAGES.find(l => l.value === language)?.label}
           </span>
         </div>
-
         <Editor
           height="400px"
           language={monacoLang}

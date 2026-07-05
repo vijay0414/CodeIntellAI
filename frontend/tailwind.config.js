@@ -5,16 +5,23 @@ export default {
     extend: {
       colors: {
         bg: {
-          base:    '#0b0d12',
-          surface: '#111318',
-          card:    '#161a24',
-          border:  '#1e2333',
-          hover:   '#1c2030',
+          base:    '#0f0a0a',
+          surface: '#150d0d',
+          card:    '#1a1010',
+          border:  '#2e1a1a',
+          hover:   '#2a1414',
         },
-        accent: {
-          DEFAULT: '#3b82f6',
-          hover:   '#2563eb',
-          muted:   'rgba(59,130,246,0.12)',
+        crimson: {
+          50:  '#fff1f2',
+          100: '#ffe4e6',
+          200: '#fecdd3',
+          300: '#fda4af',
+          400: '#fb7185',
+          500: '#f43f5e',
+          600: '#e11d48',
+          700: '#be123c',
+          800: '#9f1239',
+          900: '#881337',
         },
       },
       fontFamily: {
@@ -24,11 +31,11 @@ export default {
       keyframes: {
         shimmer: {
           '0%':   { backgroundPosition: '-400px 0' },
-          '100%': { backgroundPosition: '400px 0' },
+          '100%': { backgroundPosition: '400px 0'  },
         },
         fadeIn: {
           from: { opacity: '0', transform: 'translateY(6px)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
+          to:   { opacity: '1', transform: 'translateY(0)'   },
         },
       },
       animation: {
