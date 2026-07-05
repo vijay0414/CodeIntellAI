@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: codedoctor-backend
+    env: python
+    region: India
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false          # e.g. https://your-app.vercel.app
+      - key: LLM_PROVIDER
+        value: groq
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: INFO

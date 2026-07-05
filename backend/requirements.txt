@@ -1,0 +1,13 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+
+# HTTP client (async LLM calls)
+httpx==0.28.1
+
+# Data validation
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# Form parsing (required by FastAPI for multipart — safe to include)
+python-multipart==0.0.12
