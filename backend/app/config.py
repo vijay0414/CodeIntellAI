@@ -24,7 +24,8 @@ class Settings(BaseSettings):
     llm_json_retries: int = 1
 
     # ── CORS ──────────────────────────────────────────────────────────────────
-    # Primary production frontend URL (set this env var on Render)
+    # Comma-separated list of allowed frontend URLs
+    # e.g. "https://myapp.vercel.app,https://myapp-git-main-xyz.vercel.app"
     frontend_url: str = "http://localhost:5173"
 
     # ── App ───────────────────────────────────────────────────────────────────
@@ -34,15 +35,19 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> list[str]:
         """
-        Always allows localhost for local dev.
-        Adds the production frontend URL when set via FRONTEND_URL env var.
+        Parses FRONTEND_URL as a comma-separated list of allowed origins.
+        Always includes localhost for local dev.
+        Strips trailing slashes to avoid CORS mismatches.
         """
-        origins = {
+        base = {
             "http://localhost:5173",
             "http://localhost:3000",
-            self.frontend_url,
         }
-        return [o for o in origins if o]
+        for url in self.frontend_url.split(","):
+            stripped = url.strip().rstrip("/")
+            if stripped:
+                base.add(stripped)
+        return list(base)
 
 
 @lru_cache
