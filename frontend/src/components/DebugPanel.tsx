@@ -22,7 +22,7 @@ export function DebugPanel({ result, isLoading, error, errorTrace, sampleInput, 
 
   return (
     <div className="space-y-4 panel-enter">
-      <div className="rounded-2xl border border-[#1e2333] bg-[#11151f] p-4">
+      <div className="rounded-2xl border border-[#2A2A2A] bg-[#161616] p-4">
         <p className="text-sm font-semibold text-slate-200">Trace the failure</p>
         <p className="mt-1 text-sm text-slate-500">Paste the error output and a sample input if you want a more precise root-cause analysis.</p>
 
@@ -35,7 +35,7 @@ export function DebugPanel({ result, isLoading, error, errorTrace, sampleInput, 
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               onChange={(e) => onTraceChange(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-[#1e2333] bg-[#080b11] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-blue-500"
+              className="mt-2 w-full rounded-2xl border border-[#2A2A2A] bg-[#0A0A0A] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-red-600"
               placeholder="TypeScript error: Cannot read properties of undefined..."
             />
           </label>
@@ -46,14 +46,14 @@ export function DebugPanel({ result, isLoading, error, errorTrace, sampleInput, 
               rows={3}
               value={sampleInput}
               onChange={(e) => onSampleChange(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-[#1e2333] bg-[#080b11] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-blue-500"
+              className="mt-2 w-full rounded-2xl border border-[#2A2A2A] bg-[#0A0A0A] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-red-600"
               placeholder="Optional input that triggers the bug"
             />
           </label>
 
           <button
             onClick={onSubmit}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
+            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
           >
             Inspect failure
           </button>
@@ -66,7 +66,7 @@ export function DebugPanel({ result, isLoading, error, errorTrace, sampleInput, 
             <p className="text-[11px] uppercase tracking-[0.25em] text-red-300">Root cause</p>
             <p className="mt-2 text-sm text-slate-200">{result.root_cause}</p>
           </div>
-          <div className="rounded-2xl border border-[#1e2333] bg-[#11151f] p-4">
+          <div className="rounded-2xl border border-[#2A2A2A] bg-[#161616] p-4">
             <p className="text-[11px] uppercase tracking-[0.25em] text-slate-500">Fix</p>
             <pre className="mt-2 overflow-x-auto whitespace-pre-wrap text-sm text-slate-300">{result.fixed_code}</pre>
           </div>
@@ -76,7 +76,7 @@ export function DebugPanel({ result, isLoading, error, errorTrace, sampleInput, 
           </div>
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-[#2a3050] bg-[#0b0d12] p-4 text-sm text-slate-500">
+        <div className="rounded-2xl border border-dashed border-[#2A2A2A] bg-[#0A0A0A] p-4 text-sm text-slate-500">
           {isFocused ? 'The trace is ready — inspect it and surface the likely failure path.' : 'No debug analysis yet. Send a trace and inspect the suggested fix.'}
         </div>
       )}

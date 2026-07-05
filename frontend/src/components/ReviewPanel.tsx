@@ -5,6 +5,7 @@ import { PanelSkeleton }    from './Loader'
 import { ErrorState }       from './ErrorState'
 
 // ── colour maps ───────────────────────────────────────────────────────────────
+// Severity colors are SEMANTIC (functional) — kept unchanged per spec
 const SEV: Record<Severity, { badge: string; bar: string }> = {
   critical: { badge: 'bg-red-500/15 text-red-400 border border-red-500/25',    bar: 'border-l-red-500' },
   high:     { badge: 'bg-orange-500/15 text-orange-400 border border-orange-500/25', bar: 'border-l-orange-500' },
@@ -14,7 +15,7 @@ const SEV: Record<Severity, { badge: string; bar: string }> = {
 const CAT: Record<IssueCategory, string> = {
   bug:         'bg-red-900/30 text-red-300',
   security:    'bg-purple-900/30 text-purple-300',
-  performance: 'bg-blue-900/30 text-blue-300',
+  performance: 'bg-slate-700/50 text-slate-300',
   style:       'bg-slate-700/50 text-slate-400',
 }
 const SEV_ORDER: Record<Severity, number> = { critical: 0, high: 1, medium: 2, low: 3 }
@@ -29,7 +30,7 @@ function IssueCard({ issue }: { issue: ReviewIssue }) {
       <div className="flex items-start gap-2 cursor-pointer" onClick={() => setOpen(v => !v)}>
         {issue.line > 0 && (
           <span className="shrink-0 mt-0.5 text-[11px] font-mono text-slate-500
-                           bg-[#0b0d12] px-1.5 py-0.5 rounded border border-[#1e2333]">
+                           bg-[#0A0A0A] px-1.5 py-0.5 rounded border border-[#2A2A2A]">
             L{issue.line}
           </span>
         )}
@@ -46,9 +47,9 @@ function IssueCard({ issue }: { issue: ReviewIssue }) {
       <p className="text-sm text-slate-200 mt-2 leading-relaxed">{issue.message}</p>
 
       {open && (
-        <div className="mt-3 pt-3 border-t border-[#1e2333] panel-enter">
+        <div className="mt-3 pt-3 border-t border-[#2A2A2A] panel-enter">
           <p className="text-[11px] uppercase tracking-wider text-slate-500 mb-1.5">Suggestion</p>
-          <p className="text-sm text-blue-300 leading-relaxed">{issue.suggestion}</p>
+          <p className="text-sm text-slate-300 leading-relaxed">{issue.suggestion}</p>
         </div>
       )}
     </div>
@@ -72,7 +73,7 @@ export function ReviewPanel({ result, isLoading, error, onRetry }: Props) {
 
   if (!result) return (
     <div className="flex flex-col items-center justify-center py-20 gap-3 text-center panel-enter">
-      <div className="w-14 h-14 rounded-2xl bg-[#161a24] border border-[#1e2333] flex items-center justify-center">
+      <div className="w-14 h-14 rounded-2xl bg-[#161616] border border-[#2A2A2A] flex items-center justify-center">
         <svg className="w-7 h-7 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -110,7 +111,7 @@ export function ReviewPanel({ result, isLoading, error, onRetry }: Props) {
           <p className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">Summary</p>
           <p className="text-sm text-slate-300 leading-relaxed">{result.summary}</p>
 
-          {/* Severity pill filters */}
+          {/* Severity pill filters — semantic colors kept */}
           <div className="flex flex-wrap gap-2 mt-4">
             {(['critical', 'high', 'medium', 'low'] as Severity[]).map(s =>
               counts[s] ? (
@@ -142,7 +143,7 @@ export function ReviewPanel({ result, isLoading, error, onRetry }: Props) {
                 <button key={s} onClick={() => setSortBy(s)}
                   className={`px-2.5 py-1 rounded-md capitalize transition-colors ${
                     sortBy === s
-                      ? 'bg-blue-600/15 text-blue-400 border border-blue-500/25'
+                      ? 'bg-red-600/15 text-red-400 border border-red-600/25'
                       : 'text-slate-500 hover:text-slate-300'
                   }`}>
                   {s}
@@ -157,7 +158,7 @@ export function ReviewPanel({ result, isLoading, error, onRetry }: Props) {
               : (
                 <div className="card text-center py-6">
                   <p className="text-slate-500 text-sm">No {filter} issues</p>
-                  <button className="text-blue-400 text-xs mt-1.5 hover:underline"
+                  <button className="text-red-400 text-xs mt-1.5 hover:underline"
                     onClick={() => setFilter('all')}>
                     Show all
                   </button>

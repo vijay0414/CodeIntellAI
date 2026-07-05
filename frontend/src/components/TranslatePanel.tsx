@@ -16,7 +16,7 @@ interface Props {
 
 export function TranslatePanel({ result, sourceLanguage, isLoading, error, onSubmit, onRetry }: Props) {
   const available = LANGUAGES.filter(l => l.value !== sourceLanguage)
-  const [target, setTarget]   = useState(available[0]?.value ?? 'javascript')
+  const [target, setTarget] = useState(available[0]?.value ?? 'javascript')
 
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); onSubmit(target) }
 
@@ -26,23 +26,23 @@ export function TranslatePanel({ result, sourceLanguage, isLoading, error, onSub
       <form onSubmit={handleSubmit} className="card flex flex-wrap items-end gap-4">
         <div>
           <p className="text-[11px] uppercase tracking-wider text-slate-500 mb-1.5">From</p>
-          <div className="px-3 py-2 bg-[#0b0d12] border border-[#1e2333] rounded-lg text-sm text-slate-400 font-mono capitalize">
+          <div className="px-3 py-2 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg text-sm text-slate-400 font-mono capitalize">
             {sourceLanguage}
           </div>
         </div>
-        <svg className="w-5 h-5 text-blue-500 mb-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-5 h-5 text-red-500 mb-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
         </svg>
         <div>
           <p className="text-[11px] uppercase tracking-wider text-slate-500 mb-1.5">To</p>
           <select value={target} onChange={e => setTarget(e.target.value as Language)}
-            className="bg-[#0b0d12] border border-[#1e2333] focus:border-blue-500 text-slate-200
+            className="bg-[#0A0A0A] border border-[#2A2A2A] focus:border-red-600 text-slate-200
                        text-sm rounded-lg px-3 py-2 outline-none cursor-pointer transition-colors">
             {available.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
           </select>
         </div>
         <button type="submit" disabled={isLoading}
-          className="flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-500
+          className="flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-700
                      disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm
                      font-semibold rounded-lg transition-all active:scale-95">
           {isLoading
@@ -80,8 +80,8 @@ export function TranslatePanel({ result, sourceLanguage, isLoading, error, onSub
           )}
 
           {/* translated code */}
-          <div className="rounded-xl overflow-hidden border border-[#1e2333]">
-            <div className="px-4 py-2.5 bg-[#0f1117] border-b border-[#1e2333] text-xs text-slate-500 flex gap-2">
+          <div className="rounded-xl overflow-hidden border border-[#2A2A2A]">
+            <div className="px-4 py-2.5 bg-[#111111] border-b border-[#2A2A2A] text-xs text-slate-500 flex gap-2">
               <span className="capitalize">{result.source_language}</span>
               <span>→</span>
               <span className="capitalize">{result.target_language}</span>
@@ -94,9 +94,9 @@ export function TranslatePanel({ result, sourceLanguage, isLoading, error, onSub
               useDarkTheme={true}
               showDiffOnly={false}
               styles={{ variables: { dark: {
-                diffViewerBackground: '#0b0d12',
+                diffViewerBackground: '#0A0A0A',
                 addedBackground: '#0d2010', addedColor: '#86efac',
-                gutterBackground: '#111318', gutterColor: '#4b5563',
+                gutterBackground: '#111111', gutterColor: '#4b5563',
               }}}}
             />
           </div>
@@ -108,8 +108,8 @@ export function TranslatePanel({ result, sourceLanguage, isLoading, error, onSub
               <div className="space-y-2">
                 {result.translation_notes.map((n, i) => (
                   <div key={i} className="card flex gap-3">
-                    <span className="shrink-0 w-6 h-6 rounded-full bg-blue-600/15 border border-blue-500/25
-                                     text-blue-400 text-xs font-bold flex items-center justify-center mt-0.5">
+                    <span className="shrink-0 w-6 h-6 rounded-full bg-red-600/15 border border-red-600/25
+                                     text-red-400 text-xs font-bold flex items-center justify-center mt-0.5">
                       {i + 1}
                     </span>
                     <div>

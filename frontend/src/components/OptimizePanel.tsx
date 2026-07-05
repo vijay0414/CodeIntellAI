@@ -12,7 +12,6 @@ interface Props {
   onRetry?: () => void
 }
 
-// Normalise code: ensure LLM-returned code with escaped \n is real newlines
 function normalise(code: string): string {
   return code.replace(/\\n/g, '\n').replace(/\\t/g, '\t')
 }
@@ -23,7 +22,7 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
 
   if (!result) return (
     <div className="flex flex-col items-center justify-center py-16 gap-4 text-center panel-enter">
-      <div className="w-14 h-14 rounded-2xl bg-[#161a24] border border-[#1e2333] flex items-center justify-center">
+      <div className="w-14 h-14 rounded-2xl bg-[#161616] border border-[#2A2A2A] flex items-center justify-center">
         <svg className="w-7 h-7 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z"/>
         </svg>
@@ -33,8 +32,8 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
         <p className="text-slate-600 text-sm mt-1">Get a diff + complexity analysis</p>
       </div>
       <button onClick={onLoad}
-        className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold
-                   rounded-lg transition-all shadow-lg shadow-blue-900/25 active:scale-95">
+        className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold
+                   rounded-lg transition-all shadow-lg shadow-red-900/25 active:scale-95">
         Optimize Code
       </button>
     </div>
@@ -59,7 +58,7 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
               {result.complexity_before}
             </code>
           </div>
-          <svg className="w-5 h-5 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5 text-red-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
           </svg>
           <div className="text-center">
@@ -79,8 +78,8 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
 
       {/* ── Diff ── */}
       {!noChange && (
-        <div className="rounded-xl overflow-hidden border border-[#1e2333]">
-          <div className="flex items-center gap-4 px-4 py-2.5 bg-[#0f1117] border-b border-[#1e2333]">
+        <div className="rounded-xl overflow-hidden border border-[#2A2A2A]">
+          <div className="flex items-center gap-4 px-4 py-2.5 bg-[#111111] border-b border-[#2A2A2A]">
             <span className="text-xs text-slate-500">Before</span>
             <span className="text-slate-700">→</span>
             <span className="text-xs text-slate-500">After</span>
@@ -95,17 +94,17 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
               styles={{
                 variables: {
                   dark: {
-                    diffViewerBackground:  '#0b0d12',
+                    diffViewerBackground:  '#0A0A0A',
                     addedBackground:       '#0d2010',
                     addedColor:            '#86efac',
                     removedBackground:     '#1f0808',
                     removedColor:          '#fca5a5',
                     wordAddedBackground:   '#166534',
                     wordRemovedBackground: '#7f1d1d',
-                    gutterBackground:      '#111318',
+                    gutterBackground:      '#111111',
                     gutterColor:           '#4b5563',
-                    codeFoldBackground:    '#0b0d12',
-                    codeFoldGutterBackground: '#0b0d12',
+                    codeFoldBackground:    '#0A0A0A',
+                    codeFoldGutterBackground: '#0A0A0A',
                   },
                 },
                 line:            { padding: '2px 8px' },
@@ -118,11 +117,11 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
         </div>
       )}
 
-      {/* ── Optimized code block (readable fallback) ── */}
+      {/* ── Optimized code block ── */}
       {!noChange && (
         <div>
           <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">Optimized code</p>
-          <pre className="bg-[#0b0d12] border border-[#1e2333] rounded-xl p-4 text-xs font-mono
+          <pre className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-xl p-4 text-xs font-mono
                           text-slate-300 overflow-x-auto whitespace-pre leading-relaxed">
             {newCode}
           </pre>
@@ -135,8 +134,8 @@ export function OptimizePanel({ result, originalCode, isLoading, error, onLoad, 
         <div className="space-y-2">
           {result.changes.map((c, i) => (
             <div key={i} className="card flex gap-3">
-              <span className="shrink-0 w-6 h-6 rounded-full bg-blue-600/15 border border-blue-500/25
-                               text-blue-400 text-xs font-bold flex items-center justify-center mt-0.5">
+              <span className="shrink-0 w-6 h-6 rounded-full bg-red-600/15 border border-red-600/25
+                               text-red-400 text-xs font-bold flex items-center justify-center mt-0.5">
                 {i + 1}
               </span>
               <div>
