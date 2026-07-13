@@ -118,6 +118,7 @@ export default function App() {
           count={interviewCount} onCountChange={setInterviewCount} onLoad={handleInterview} />
       case 'translate':
         return <TranslatePanel result={translateMutation.data ?? null} sourceLanguage={language}
+          sourceCode={code}
           isLoading={translateMutation.isPending} error={translateMutation.error?.message ?? null}
           onSubmit={handleTranslate} onRetry={() => translateMutation.reset()} />
       case 'batch':
