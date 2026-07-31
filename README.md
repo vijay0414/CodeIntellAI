@@ -18,7 +18,7 @@
 
 CodeDoctor is a full-stack AI-powered code intelligence tool built for developers who want more than just a linter. Paste any code snippet and get a structured review, plain-English explanation, automated debug analysis, performance optimization with complexity comparisons, cross-language translation, and interview questions — all from a single interface. The backend is fully stateless by design, meaning no code is ever stored server-side, and each feature runs as an independent API endpoint for clean separation and fast parallel loading.
 
-**Live Demo:** [(https://code-intell-ai.vercel.app/)]
+**Live Demo:** ![CodeIntellAI](https://code-intell-ai.vercel.app/)
 
 ---
 
