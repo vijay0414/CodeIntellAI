@@ -26,13 +26,13 @@ CodeDoctor is a full-stack AI-powered code intelligence tool built for developer
 
 | # | Feature | Description |
 |---|---------|-------------|
-| 1 | 🔍 **Code Review** | Analyzes code for bugs, style issues, and security problems. Returns a 0–100 health score with categorized, severity-tagged findings. |
-| 2 | 📖 **Code Explanation** | Plain-English walkthrough of what the code does. Includes a Beginner / Advanced mode toggle for audience-appropriate depth. |
-| 3 | 🐛 **Debugger** | Takes a code snippet plus an error traceback, identifies the root cause, returns a corrected version and a prevention tip. |
-| 4 | ⚡ **Optimizer** | Rewrites code for better performance. Shows before/after time complexity (e.g. O(n²) → O(n log n)) and a side-by-side diff view. |
-| 5 | 🌐 **Language Translator** | Converts code logic into a target language while preserving exact behavior. Includes notes on language-specific concept mappings. |
-| 6 | 🎯 **Interview Question Generator** | Detects patterns, algorithms, and data structures in your code, then generates relevant interview questions with difficulty tags and answer hints. |
-| 7 | 📦 **Batch Review** | Upload multiple files at once. Returns a summary dashboard (average health score, most common issue, best/worst file) plus per-file results, processed concurrently. |
+| 1 |  **Code Review** | Analyzes code for bugs, style issues, and security problems. Returns a 0–100 health score with categorized, severity-tagged findings. |
+| 2 |  **Code Explanation** | Plain-English walkthrough of what the code does. Includes a Beginner / Advanced mode toggle for audience-appropriate depth. |
+| 3 |  **Debugger** | Takes a code snippet plus an error traceback, identifies the root cause, returns a corrected version and a prevention tip. |
+| 4 |  **Optimizer** | Rewrites code for better performance. Shows before/after time complexity (e.g. O(n²) → O(n log n)) and a side-by-side diff view. |
+| 5 |  **Language Translator** | Converts code logic into a target language while preserving exact behavior. Includes notes on language-specific concept mappings. |
+| 6 |  **Interview Question Generator** | Detects patterns, algorithms, and data structures in your code, then generates relevant interview questions with difficulty tags and answer hints. |
+| 7 |  **Batch Review** | Upload multiple files at once. Returns a summary dashboard (average health score, most common issue, best/worst file) plus per-file results, processed concurrently. |
 
 ---
 
